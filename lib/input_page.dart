@@ -1,4 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'icon_content.dart';
+import 'reusable_card.dart';
+
+const activeCardColor = 0xff1d1e33;
 
 class InputPage extends StatefulWidget {
   @override
@@ -20,48 +25,48 @@ class _InputPageState extends State<InputPage> {
               Expanded(
                 child: Row(children: <Widget>[
                   Expanded(
-                    child: Container(
-                      color: Colors.red,
+                    child: ReusableCard(
+                      color: Color(activeCardColor),
+                      childCard: IconContent(
+                        genderText: 'Male',
+                        icon: FontAwesomeIcons.male,
+                      ),
                     ),
                   ),
                   Expanded(
-                    child: Container(
-                      color: Colors.green,
+                      child: ReusableCard(
+                    color: Color(activeCardColor),
+                    childCard: IconContent(
+                      genderText: 'Female',
+                      icon: FontAwesomeIcons.female,
                     ),
-                  ),
+                  )),
                 ]),
               ),
               Expanded(
                 child: Row(children: <Widget>[
-                  Expanded(
-                    child: Container(
-                      color: Colors.blue,
-                    ),
-                  )
+                  Expanded(child: ReusableCard(color: Color(activeCardColor)))
                 ]),
               ),
               Expanded(
                 child: Row(
                   children: <Widget>[
                     Expanded(
-                      child: Container(
-                        color: Colors.yellow,
-                      ),
-                    ),
-                    Expanded(
-                      child: Container(
-                        color: Colors.pink,
-                      ),
-                    )
+                        child: ReusableCard(color: Color(activeCardColor))),
+                    Expanded(child: ReusableCard(color: Color(activeCardColor)))
                   ],
+                ),
+              ),
+              Expanded(
+                child: Container(
+                  color: Colors.pink,
+                  margin: EdgeInsets.only(top: 10.0),
+                  width: double.infinity,
                 ),
               ),
             ],
           ),
         ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.add),
       ),
     );
   }
