@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-class IconContent extends StatelessWidget {
+class ChildCard extends StatelessWidget {
   final String genderText;
   final IconData icon;
-  IconContent({this.genderText, this.icon});
+  ChildCard({this.genderText, this.icon});
 
   @override
   Widget build(BuildContext context) {
