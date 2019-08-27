@@ -2,9 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'icon_content.dart';
 import 'reusable_card.dart';
-
-const activeCardColor = Color(0xff1d1e33);
-const inactiveCardColor = Color(0xff1d1e28);
+import 'constants.dart';
 
 enum Gender { male, female }
 
@@ -15,6 +13,13 @@ class InputPage extends StatefulWidget {
 
 class _InputPageState extends State<InputPage> {
   Gender selectedGender;
+  int height = 180;
+  double minHeight = 120;
+  double maxHeight = 220;
+
+  int weight = 60;
+  int age = 28;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,54 +34,99 @@ class _InputPageState extends State<InputPage> {
               Expanded(
                 child: Row(children: <Widget>[
                   Expanded(
-                    child: GestureDetector(
-                      onTap: () {
+                    child: ReusableCard(
+                      onPress: () {
                         setState(() {
                           selectedGender = Gender.male;
                         });
                         print('male button pressed');
                       },
-                      child: ReusableCard(
-                        color: selectedGender == Gender.male
-                            ? activeCardColor
-                            : inactiveCardColor,
-                        childCard: IconContent(
-                          genderText: 'Male',
-                          icon: FontAwesomeIcons.male,
-                        ),
+                      color: selectedGender == Gender.male
+                          ? kActiveCardColor
+                          : kInactiveCardColor,
+                      childCard: IconContent(
+                        genderText: 'Male',
+                        icon: FontAwesomeIcons.male,
                       ),
                     ),
                   ),
                   Expanded(
-                      child: GestureDetector(
-                    onTap: () {
-                      setState(() {
-                        selectedGender = Gender.female;
-                      });
-                      print('female button pressed');
-                    },
                     child: ReusableCard(
+                      onPress: () {
+                        setState(() {
+                          selectedGender = Gender.female;
+                        });
+                      },
                       color: selectedGender == Gender.female
-                          ? activeCardColor
-                          : inactiveCardColor,
+                          ? kActiveCardColor
+                          : kInactiveCardColor,
                       childCard: IconContent(
                         genderText: 'Female',
                         icon: FontAwesomeIcons.female,
                       ),
                     ),
-                  )),
+                  ),
                 ]),
               ),
               Expanded(
                 child: Row(children: <Widget>[
-                  Expanded(child: ReusableCard(color: activeCardColor))
+                  Expanded(
+                    child: ReusableCard(
+                      color: kActiveCardColor,
+                      childCard: Column(
+                        children: <Widget>[
+                          Text(
+                            'HEIGHT',
+                            style: kLabelTextStyle,
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.baseline,
+                            textBaseline: TextBaseline.alphabetic,
+                            children: <Widget>[
+                              Text(
+                                height.toString(),
+                                style: kNumberTextStyle,
+                              ),
+                              Text(
+                                'cm',
+                                style: kLabelTextStyle,
+                              ),
+                              SliderTheme(
+                                data: SliderTheme.of(context).copyWith(
+                                  activeTrackColor: Colors.white,
+                                  inactiveTrackColor: Color(0xFF8D8E98),
+                                  thumbColor: Color(0xFFEB1555),
+                                  overlayColor: Color(0x29EB1555),
+                                  thumbShape: RoundSliderThumbShape(
+                                      enabledThumbRadius: 15.0),
+                                  overlayShape: RoundSliderOverlayShape(
+                                      overlayRadius: 30.0),
+                                ),
+                                child: Slider(
+                                  value: height.toDouble(),
+                                  min: minHeight,
+                                  max: maxHeight,
+                                  onChanged: (double newValue) {
+                                    setState(() {
+                                      height = newValue.round();
+                                    });
+                                  },
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
+                  )
                 ]),
               ),
               Expanded(
                 child: Row(
                   children: <Widget>[
-                    Expanded(child: ReusableCard(color: activeCardColor)),
-                    Expanded(child: ReusableCard(color: activeCardColor))
+                    Expanded(child: ReusableCard(color: kActiveCardColor)),
+                    Expanded(child: ReusableCard(color: kActiveCardColor))
                   ],
                 ),
               ),
@@ -85,6 +135,7 @@ class _InputPageState extends State<InputPage> {
                   color: Colors.pink,
                   margin: EdgeInsets.only(top: 10.0),
                   width: double.infinity,
+                  height: kBottomContainerHeight,
                 ),
               ),
             ],
