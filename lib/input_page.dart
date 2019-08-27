@@ -4,6 +4,8 @@ import 'icon_content.dart';
 import 'reusable_card.dart';
 import 'constants.dart';
 import 'round_icon_button.dart';
+import 'result_page.dart';
+import 'button_bottom.dart';
 
 enum Gender { male, female }
 
@@ -212,6 +214,14 @@ class _InputPageState extends State<InputPage> {
               margin: EdgeInsets.only(top: 10.0),
               width: double.infinity,
               height: kBottomContainerHeight,
+              child: BottomButton(
+                onTap: () {
+                  Navigator.push(context, MaterialPageRoute(builder: (context) {
+                    return ResultPage();
+                  }));
+                },
+                buttonTitle: 'CALCULATE',
+              ),
             ),
           ),
         ],
